@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 dotenv.config({ path: "./.env" });
 const Routes = require("./routers/userRouter");
-
+const port =process.env.PORT
 mongoose
   .connect(process.env.CONN_STR, {
     UseNewUrlParser: true,
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use("/users", Routes);
 
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
     console.log(`Server is running at http://127.0.0.1:${process.env.PORT}`);
 });
 
