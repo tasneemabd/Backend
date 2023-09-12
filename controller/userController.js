@@ -25,22 +25,23 @@ const createToken = (id) => {
 
 
     exports.signupUser = async (req, res) => {
-        console.log(req.body);
-        try {
-          const newPassword =await bcrypt.hash(req.body.password,10)
-          await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
+        // console.log(req.body);
+        // try {
+        //   const newPassword =await bcrypt.hash(req.body.password,10)
+        //   await User.create({
+        //     name: req.body.name,
+        //     email: req.body.email,
+        //     phone: req.body.phone,
          
             
-            password: newPassword,
-          });
-          res.json({ status: 'ok' });
-        } catch (err) {
-          console.log(err);
-          res.json({ status: 'error', error: 'Duplicate email' });
-        }
+        //     password: newPassword,
+        //   });
+        //   res.json({ status: 'ok' });
+        // } catch (err) {
+        //   console.log(err);
+        //   res.json({ status: 'error', error: 'Duplicate email' });
+        // }
+        console.log("sjdfsdvh")
       }
       
       exports.loginUser = async (req, res) => {
