@@ -1,7 +1,6 @@
 const express = require("express");
 const userController = require("../controller/userController");
 const authMiddleware = require('../controller/Authentication ')
-const authenticateUser = require('./authenticateUser'); // Your authentication middleware
 
 const router = express.Router();
 
@@ -29,12 +28,12 @@ router.route("/Surgery/:IDNumber").post(userController.SurgeryPost);
 router.route('/getallSurgery/:IDNumber').get(userController.getallSurgery);
 router.route('/getallSurgery').get(userController.getallSurgery);
 router.route('/getpatientprofile').get (userController.patientProfileinfo);
+router.route('/patient-profile').get (userController.getPatientProfile);
 
 
 
 
 
-router.get('/patient-profile', authenticateUser, getPatientProfile);
 
 
 module.exports = router;

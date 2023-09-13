@@ -100,7 +100,7 @@ const SurgerySchema = new mongoose.Schema({
 }, { collection: 'Surgery-data' });
 
 const User = mongoose.model('User', UserSchema);
-const Admin = mongoose.model('User', AdminSchema);
+const Admin = mongoose.model('Admin', AdminSchema);
 const labResult = mongoose.model('labResult', LabResultSchema);
 const Surgerydata = mongoose.model('Surgery', SurgerySchema);
 
