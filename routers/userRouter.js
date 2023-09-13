@@ -15,8 +15,8 @@ router.route("/login").post(userController.loginUser);
 
 
 
-router.route("/signup").post(userController.signupAdmin);
-router.route("/login").post(userController.loginAdmin);
+// router.route("/signup").post(userController.signupAdmin);
+// router.route("/login").post(userController.loginAdmin);
 router.route("/addpatients").post(userController.AddPatient);
 // router.route('/patientProfile').get(authMiddleware, userController.getPatientProfile);
 router.route('/patientProfile/:IDNumber').get(userController.getPatientProfileById);

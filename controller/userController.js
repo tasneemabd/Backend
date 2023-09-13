@@ -343,21 +343,21 @@ const createToken = (id) => {
       }
       exports.getPatientProfile = async (req, res) => {
         try {
-          // Authenticate the user using the JWT token from the request headers
-          const token = req.headers.authorization.replace('Bearer ', '');
-          const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      
-          // Fetch patient data from the database based on the user's ID
-          const patientData = await Patient.findOne({ id: decoded.id });
-      
-          if (!patientData) {
-            return res.status(404).json({ status: 'error', error: 'Patient not found' });
-          }
-      
-          res.status(200).json(patientData);
-        } catch (error) {
-          console.error('Error fetching patient data:', error);
-          res.status(500).json({ status: 'error', error: 'Internal server error' });
-        }
-      };
+    // Authenticate the user using the JWT token from the request headers
+    const token = req.headers.authorization.replace('Bearer ', '');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // Fetch patient data from the database based on the user's ID
+    const patientData = await Patient.findOne({ id: decoded.id });
+
+    if (!patientData) {
+      return res.status(404).json({ status: 'error', error: 'Patient not found' });
+    }
+
+    res.status(200).json(patientData);
+  } catch (error) {
+    console.error('Error fetching patient data:', error);
+    res.status(500).json({ status: 'error', error: 'Internal server error' });
+  }
+};
       
