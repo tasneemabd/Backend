@@ -25,28 +25,45 @@ const createToken = (id) => {
 };
 
 
-    exports.signupUser = async (req, res) => {
-        console.log(req.body);
-        try {
-          const newPassword =await bcrypt.hash(req.body.password,10)
-          await User.create({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
+    // exports.signupUser = async (req, res) => {
+    //     console.log(req.body);
+    //     try {
+    //       const newPassword =await bcrypt.hash(req.body.password,10)
+    //       await User.create({
+    //         name: req.body.name,
+    //         email: req.body.email,
+    //         phone: req.body.phone,
          
             
-            password: newPassword,
-          });
-          res.json({ status: 'ok' });
-        } catch (err) {
-          console.log(err);
-          res.json({ status: 'error', error: 'Duplicate email' });
-        }
+    //         password: newPassword,
+    //       });
+    //       res.json({ status: 'ok' });
+    //     } catch (err) {
+    //       console.log(err);
+    //       res.json({ status: 'error', error: 'Duplicate email' });
+    //     }
+    //   }
+    exports.signupUser = async (req, res) => {
+      console.log(req.body);
+      try {
+        const newPassword = await bcrypt.hash(req.body.password, 10);
+        await User.create({
+          name: req.body.name,
+          id: req.body.id, // Use the provided ID from the request body
+          phone: req.body.phone,
+          password: newPassword,
+        });
+        res.json({ status: 'ok' });
+      } catch (err) {
+        console.log(err);
+        res.json({ status: 'error', error: 'Duplicate ID' });
       }
+    };
+    
       
       exports.loginUser = async (req, res) => {
         const user = await User.findOne({
-          email: req.body.email,
+          id: req.body.id,
           // password: req.body.password,
         })
         if(!user) {return {stutas: 'error', error :'invalid token'}}
@@ -55,7 +72,7 @@ const createToken = (id) => {
         if (isPasswordValid) {
           const token= jwt.sign({
               name:user.name,
-              email:user.email,
+              id:user.id,
     
           },'secret123')
           return res.json({ status: 'ok', user: token });
@@ -326,16 +343,21 @@ const createToken = (id) => {
       }
       exports.getPatientProfile = async (req, res) => {
         try {
-          // Fetch patient data from the database based on the user's email
-          const patientData = await Patient.findOne({ email: req.user.email });
+          // Authenticate the user using the JWT token from the request headers
+          const token = req.headers.authorization.replace('Bearer ', '');
+          const decoded = jwt.verify(token, process.env.JWT_SECRET);
       
-          // Log the patientData to check its format
-          console.log(patientData);
+          // Fetch patient data from the database based on the user's ID
+          const patientData = await Patient.findOne({ id: decoded.id });
       
-          res.status(200).json(patientData); // Send the data as a JSON response
+          if (!patientData) {
+            return res.status(404).json({ status: 'error', error: 'Patient not found' });
+          }
+      
+          res.status(200).json(patientData);
         } catch (error) {
           console.error('Error fetching patient data:', error);
-          res.status(500).json({ error: 'Internal server error' });
+          res.status(500).json({ status: 'error', error: 'Internal server error' });
         }
       };
       
