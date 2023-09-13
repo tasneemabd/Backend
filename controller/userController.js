@@ -348,7 +348,7 @@ const createToken = (id) => {
           const decoded = jwt.verify(token, process.env.JWT_SECRET);
       
           // Fetch patient data from the database based on the user's ID
-          const patientData = await Patient.findOne({ id: decoded.IDNumber });
+          const patientData = await Patient.findOne({ id: decoded.id });
       
           if (!patientData) {
             return res.status(404).json({ status: 'error', error: 'Patient not found' });
