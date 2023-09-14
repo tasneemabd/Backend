@@ -36,7 +36,7 @@ const createToken = (id) => {
             
             password: newPassword,
           });
-          const IDNumber = newUser.IDNumber;
+          const IDNumber = User.IDNumber;
 
           res.json({ status: 'ok', IDNumber: IDNumber });
         } catch (err) {
@@ -59,7 +59,7 @@ const createToken = (id) => {
               if (isPasswordValid) {
                 const token= jwt.sign({
                     IDNumber:user.IDNumber,
-                    email:user.email,
+                
           
                 },'secret123')
                 return res.json({ status: 'ok', user: token });
