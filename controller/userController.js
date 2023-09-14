@@ -30,27 +30,25 @@ const createToken = (id) => {
           const newPassword =await bcrypt.hash(req.body.password,10)
           await User.create({
             name: req.body.name,
-            IDNumber: req.body.IDNumber,
+            email: req.body.email,
             phone: req.body.phone,
          
             
             password: newPassword,
           });
-          const IDNumber = User.IDNumber;
-
-          res.json({ status: 'ok', IDNumber: IDNumber });
+          res.json({ status: 'ok' });
         } catch (err) {
           console.log(err);
           res.json({ status: 'error', error: 'Duplicate email' });
         }
-      };
+      }
       
      
 
       
             exports.loginUser = async (req, res) => {
               const user = await User.findOne({
-                IDNumber: req.body.IDNumber,
+                email: req.body.email,
                 // password: req.body.password,
               })
               if(!user) {return {stutas: 'error', error :'invalid token'}}
@@ -58,8 +56,8 @@ const createToken = (id) => {
           
               if (isPasswordValid) {
                 const token= jwt.sign({
-                    IDNumber:user.IDNumber,
-                
+                    name:user.name,
+                    email:user.email,
           
                 },'secret123')
                 return res.json({ status: 'ok', user: token });
