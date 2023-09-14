@@ -25,45 +25,28 @@ const createToken = (id) => {
 };
 
 
-    // exports.signupUser = async (req, res) => {
-    //     console.log(req.body);
-    //     try {
-    //       const newPassword =await bcrypt.hash(req.body.password,10)
-    //       await User.create({
-    //         name: req.body.name,
-    //         email: req.body.email,
-    //         phone: req.body.phone,
+    exports.signupUser = async (req, res) => {
+        console.log(req.body);
+        try {
+          const newPassword =await bcrypt.hash(req.body.password,10)
+          await User.create({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
          
             
-    //         password: newPassword,
-    //       });
-    //       res.json({ status: 'ok' });
-    //     } catch (err) {
-    //       console.log(err);
-    //       res.json({ status: 'error', error: 'Duplicate email' });
-    //     }
-    //   }
-    exports.signupUser = async (req, res) => {
-      console.log(req.body);
-      try {
-        const newPassword = await bcrypt.hash(req.body.password, 10);
-        await User.create({
-          name: req.body.name,
-          id: req.body.id, // Use the provided ID from the request body
-          phone: req.body.phone,
-          password: newPassword,
-        });
-        res.json({ status: 'ok' });
-      } catch (err) {
-        console.log(err);
-        res.json({ status: 'error', error: 'Duplicate ID' });
+            password: newPassword,
+          });
+          res.json({ status: 'ok' });
+        } catch (err) {
+          console.log(err);
+          res.json({ status: 'error', error: 'Duplicate email' });
+        }
       }
-    };
-    
       
       exports.loginUser = async (req, res) => {
         const user = await User.findOne({
-          id: req.body.id,
+          email: req.body.email,
           // password: req.body.password,
         })
         if(!user) {return {stutas: 'error', error :'invalid token'}}
@@ -72,7 +55,7 @@ const createToken = (id) => {
         if (isPasswordValid) {
           const token= jwt.sign({
               name:user.name,
-              id:user.id,
+              email:user.email,
     
           },'secret123')
           return res.json({ status: 'ok', user: token });
