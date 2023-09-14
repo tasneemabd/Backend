@@ -36,7 +36,7 @@ const createToken = (id) => {
             
             password: newPassword,
           });
-          const userId = newUser.IDNumber;
+          const IDNumber = newUser.IDNumber;
 
           res.json({ status: 'ok', IDNumber: IDNumber });
         } catch (err) {
