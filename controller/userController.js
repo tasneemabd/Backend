@@ -1,6 +1,5 @@
-const { User,labResult } = require('../model/Models');
-const  {Patient}  = require('../model/Models');
-const  {Surgerydata}  = require('../model/Models');
+const  User  = require('../model/Models');
+
 
 const express = require("express");
 //
@@ -44,7 +43,7 @@ const createToken = (id) => {
         }
       }
       
-      exports.loginUser = async (req, res) => {
+      exports.loginAdmin = async (req, res) => {
         const user = await User.findOne({
           email: req.body.email,
           // password: req.body.password,
@@ -81,7 +80,7 @@ const createToken = (id) => {
               }
             }
       
-            exports.loginAdmin = async (req, res) => {
+            exports.loginUser = async (req, res) => {
               const user = await User.findOne({
                 email: req.body.email,
                 // password: req.body.password,
@@ -324,18 +323,4 @@ const createToken = (id) => {
           res.status(500).json({ message: 'Server Error' });
         }
       }
-      exports.getPatientProfile = async (req, res) => {
-        try {
-          // Fetch patient data from the database based on the user's email
-          const patientData = await Patient.findOne({ email: req.user.email });
-      
-          // Log the patientData to check its format
-          console.log(patientData);
-      
-          res.status(200).json(patientData); // Send the data as a JSON response
-        } catch (error) {
-          console.error('Error fetching patient data:', error);
-          res.status(500).json({ error: 'Internal server error' });
-        }
-      };
       

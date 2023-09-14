@@ -28,7 +28,6 @@ router.route("/Surgery/:IDNumber").post(userController.SurgeryPost);
 router.route('/getallSurgery/:IDNumber').get(userController.getallSurgery);
 router.route('/getallSurgery').get(userController.getallSurgery);
 router.route('/getpatientprofile').get (userController.patientProfileinfo);
-router.route('/patient-profile').get (userController.getPatientProfile);
 
 
 
