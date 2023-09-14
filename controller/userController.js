@@ -1,4 +1,4 @@
-const  {User}  = require('../model/Models');
+const  {User,Patient}  = require('../model/Models');
 
 
 const express = require("express");
@@ -30,25 +30,27 @@ const createToken = (id) => {
           const newPassword =await bcrypt.hash(req.body.password,10)
           await User.create({
             name: req.body.name,
-            email: req.body.email,
+            IDNumber: req.body.IDNumber,
             phone: req.body.phone,
          
             
             password: newPassword,
           });
-          res.json({ status: 'ok' });
+          const userId = newUser.IDNumber;
+
+          res.json({ status: 'ok', IDNumber: IDNumber });
         } catch (err) {
           console.log(err);
           res.json({ status: 'error', error: 'Duplicate email' });
         }
-      }
+      };
       
      
 
       
             exports.loginUser = async (req, res) => {
               const user = await User.findOne({
-                email: req.body.email,
+                IDNumber: req.body.IDNumber,
                 // password: req.body.password,
               })
               if(!user) {return {stutas: 'error', error :'invalid token'}}
@@ -56,7 +58,7 @@ const createToken = (id) => {
           
               if (isPasswordValid) {
                 const token= jwt.sign({
-                    name:user.name,
+                    IDNumber:user.IDNumber,
                     email:user.email,
           
                 },'secret123')
