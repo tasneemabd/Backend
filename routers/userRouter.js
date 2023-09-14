@@ -34,7 +34,6 @@ router.route('/getpatientprofile').get (userController.patientProfileinfo);
 
 
 
-router.route('/getPatientProfile').get (userController.getPatientProfile);
 
 
 

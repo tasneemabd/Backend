@@ -289,22 +289,4 @@ const createToken = (id) => {
           res.status(500).json({ message: 'Server Error' });
         }
       }
-      exports.getPatientProfile = async (req, res) => {
-        try {
-          // Assuming you have the logged-in user's ID stored in req.loggedInUserId
-          const loggedInUserId = req.loggedInUserId;
-      
-          // Find the patient data based on the logged-in user's ID
-          const patientData = await Patient.findOne({ IDNumber: loggedInUserId });
-      
-          if (!patientData) {
-            return res.status(404).json({ error: 'Patient data not found for the logged-in user' });
-          }
-      
-          res.status(200).json(patientData); // Send the patient data as JSON response
-        } catch (error) {
-          console.error('Error fetching patient data:', error);
-          res.status(500).json({ error: 'Internal server error' });
-        }
-      };
       
