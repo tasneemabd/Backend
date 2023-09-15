@@ -232,7 +232,7 @@ const createToken = (id) => {
       // };
       exports.getallSurgery = async (req, res) => {
         try {
-          const IDNumber = req.params.IDNumber;
+          const IDNumber = req.params;
           const surgeries = await Surgerydata.find({ IDNumber });
           res.json(surgeries);
         } catch (error) {
