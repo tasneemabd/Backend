@@ -234,13 +234,15 @@ const createToken = (id) => {
         try {
           const IDNumber = req.params.IDNumber;
           const surgeries = await Surgerydata.findOne({ IDNumber });
-          res.json(surgeries);
+          if (surgeries) {
+            res.json(surgeries);
+          } else {
+            res.status(404).json({ message: 'Patient not found' });
+          }
         } catch (error) {
-          console.error('Error fetching surgery records:', error);
-          res.status(500).json({ message: 'An error occurred' });
+          res.status(500).json({ message: 'Error retrieving patient' });
         }
       };
-       
     
 
       
