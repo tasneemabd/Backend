@@ -1,4 +1,4 @@
-const  {User,Patient}  = require('../model/Models');
+const  {User,Patient,Surgerydata}  = require('../model/Models');
 
 
 const express = require("express");
