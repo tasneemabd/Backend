@@ -263,36 +263,28 @@ const createToken = (id) => {
        
       exports.getSurgery = async (req, res) => {
         try {
-          const { IDNumber } = req.params.IDNumber
+          const IDNumber  = req.params.IDNumber
           const surgeries = await Surgerydata.find({ IDNumber });
+        
+          if (!surgeries) {
+            return res.status(404).json({ message: 'Patient not found' });  
+          }
+      
+          // Send the patient information to the client
           res.json(surgeries);
         } catch (error) {
-          console.error('Error fetching surgery records:', error);
-          res.status(500).json({ message: 'An error occurred' });
-          
+          console.error(error);
+          res.status(500).json({ message: 'Server Error' });
         }
-      };
+      }
        
       
-      //   try {
-      //     const surgeries = await Surgerydata.find({ IDNumber });
-      
-      //     if (!surgeries || surgeries.length === 0) {
-      //       return res.status(404).json({ message: 'Surgeries not found for the patient' });
-      //     }
-      
-      //     res.json(surgeries);
-      //   } catch (error) {
-      //     console.error(error);
-      //     res.status(500).json({ message: 'Server Error' });
-      //   }
-      // };
+
       
       
       exports.patientProfileinfo = async (req, res) => {  try {
           const patientId = req.params.IDNumber;
       
-          // Fetch patient information from the database based on the patientId
           const patient = await Patient.findById(patientId);
       
           if (!patient) {
