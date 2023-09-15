@@ -183,27 +183,7 @@ const createToken = (id) => {
       };
       
       
-      // exports.SurgeryPost =async (req, res) => {
-      //   try {
-      //     const { patientId, SurgeonName, AnesthesiaType, Description, AppointmentDetails, Procedurename, Date } = req.body;
-      
-      //     const newSurgery = new Surgerydata({
-          
-      //       SurgeonName,
-      //       AnesthesiaType,
-      //       Description,
-      //       AppointmentDetails,
-      //       Procedurename,
-      //       Date,
-      //     });
-      //     await newSurgery.save();
-      
-      //     res.status(201).json({ message: 'Surgery saved successfully' });
-      //   } catch (error) {
-      //     console.error('Error saving surgery data:', error);
-      //     res.status(500).json({ message: 'An error occurred' });
-      //   }
-      // };
+   
       exports.SurgeryPost = async (req, res) => {
         try {
           // Destructure the surgery data from the request body
@@ -252,7 +232,7 @@ const createToken = (id) => {
       // };
       exports.getallSurgery = async (req, res) => {
         try {
-          const  IDNumber  = req.params.IDNumber
+          const IDNumber = req.params.IDNumber;
           const surgeries = await Surgerydata.findOne({ IDNumber });
           res.json(surgeries);
         } catch (error) {
