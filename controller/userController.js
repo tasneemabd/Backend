@@ -233,7 +233,7 @@ const createToken = (id) => {
       exports.getallSurgery = async (req, res) => {
         try {
           const IDNumber = req.params.IDNumber;
-          const surgeries = await Surgerydata.findOne({ IDNumber });
+          const surgeries = await Surgerydata.find({ IDNumber });
           if (surgeries) {
             res.json(surgeries);
           } else {
