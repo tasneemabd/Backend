@@ -252,7 +252,7 @@ const createToken = (id) => {
       // };
       exports.getallSurgery = async (req, res) => {
         try {
-          const { IDNumber } = req.params
+          const  IDNumber  = req.params.IDNumber
           const surgeries = await Surgerydata.find({ IDNumber });
           res.json(surgeries);
         } catch (error) {
@@ -261,24 +261,7 @@ const createToken = (id) => {
         }
       };
        
-      exports.getSurgery = async (req, res) => {
-        try {
-          const IDNumber  = req.params.IDNumber
-          const surgeries = await Surgerydata.find({ IDNumber });
-        
-          if (!surgeries) {
-            return res.status(404).json({ message: 'Patient not found' });  
-          }
-      
-          // Send the patient information to the client
-          res.json(surgeries);
-        } catch (error) {
-          console.error(error);
-          res.status(500).json({ message: 'Server Error' });
-        }
-      }
-       
-      
+    
 
       
       
