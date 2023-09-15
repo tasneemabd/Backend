@@ -45,26 +45,31 @@ const createToken = (id) => {
       
      
 
+      exports.loginUser = async (req, res) => {
+        const user = await User.findOne({
+          IDNumber: req.body.IDNumber,
+        });
       
-            exports.loginUser = async (req, res) => {
-              const user = await User.findOne({
-                IDNumber: req.body.IDNumber,
-                // password: req.body.password,
-              })
-              if(!user) {return {stutas: 'error', error :'invalid token'}}
-              const isPasswordValid= await bcrypt.compare(req.body.password, user.password)
-          
-              if (isPasswordValid) {
-                const token= jwt.sign({
-                    name:user.name,
-                    IDNumber:user.IDNumber,
-          
-                },'secret123')
-                return res.json({ status: 'ok', user: token });
-              } else {
-                return res.json({ status: 'error', user: false });
-              }
-            }
+        if (!user) {
+          return res.json({ status: 'error', error: 'invalid token' });
+        }
+      
+        const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
+      
+        if (isPasswordValid) {
+          const token = jwt.sign({
+            name: user.name,
+            IDNumber: user.IDNumber,
+          }, 'secret123');
+      
+          // Include the IDNumber in the authentication response
+          return res.json({ status: 'ok', user: token, IDNumber: user.IDNumber });
+        } else {
+          return res.json({ status: 'error', user: false });
+        }
+      };
+      
+      
       
             exports.AddPatient=async (req, res) => {
               try {
@@ -247,12 +252,24 @@ const createToken = (id) => {
       // };
       exports.getallSurgery = async (req, res) => {
         try {
-          const { IDNumber } = req.params;
+          const { IDNumber } = req.params
           const surgeries = await Surgerydata.find({ IDNumber });
           res.json(surgeries);
         } catch (error) {
           console.error('Error fetching surgery records:', error);
           res.status(500).json({ message: 'An error occurred' });
+        }
+      };
+       
+      exports.getSurgery = async (req, res) => {
+        try {
+          const { IDNumber } = req.params.IDNumber
+          const surgeries = await Surgerydata.find({ IDNumber });
+          res.json(surgeries);
+        } catch (error) {
+          console.error('Error fetching surgery records:', error);
+          res.status(500).json({ message: 'An error occurred' });
+          
         }
       };
        
