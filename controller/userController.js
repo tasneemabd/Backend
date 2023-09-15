@@ -233,7 +233,7 @@ const createToken = (id) => {
       exports.getallSurgery = async (req, res) => {
         try {
           const IDNumber = req.params;
-          const surgeries = await Surgerydata.find({ IDNumber });
+          const surgeries = await Surgerydata.findOne({ IDNumber });
           res.json(surgeries);
         } catch (error) {
           console.error('Error fetching surgery records:', error);

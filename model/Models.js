@@ -83,7 +83,6 @@ const LabResultSchema = new mongoose.Schema({
 
 
 const SurgerySchema = new mongoose.Schema({
-  PatientID: { type: mongoose.Schema.Types.Number, ref: 'Patient' },
   Description: { type: String },
   Date: { type: Date },
   IDNumber: { type: Number   },
