@@ -136,4 +136,4 @@ const XRay = mongoose.model('XRay', XRaySchema);
 const MyVisit = mongoose.model('MyVisit', MyVisitSchema);
 
 
-module.exports = { User,Patient , labResult,Surgerydata,Admin};
+module.exports = { User,Patient , labResult,Surgerydata,Admin,Medication,XRay,MyVisit};
