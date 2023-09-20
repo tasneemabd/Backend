@@ -66,6 +66,7 @@ const LabResultSchema = new mongoose.Schema({
     enum: ['Blood Test', 'Urine Test'],
     default: 'Blood Test',
   },
+  IDNumber: { type: Number   },
 
   about:{ type: String },
   TestName: {type: String,
