@@ -99,9 +99,41 @@ const SurgerySchema = new mongoose.Schema({
  
 }, { collection: 'Surgery-data' });
 
+const MedicationSchema = new mongoose.Schema({
+  MedicationName: { type: String },
+  StartDate: { type: Date },
+  IDNumber: { type: Number   },
+  QuantityPrescribed: { type: String },
+  Instructions :{ type: String },
+  Procedurename: { type: String },
+
+}, { collection: 'Medication-data' });
+const XRaySchema = new mongoose.Schema({
+  TypeXray: { type: String },
+  Date: { type: Date },
+  IDNumber: { type: Number   },
+  Description: { type: String },
+ 
+
+}, { collection: 'XRay-data' });
+
+const MyVisitSchema = new mongoose.Schema({
+  Clinics: { type: String },
+  Date: { type: Date },
+  IDNumber: { type: Number   },
+  Description: { type: String },
+  Status: { type: String },
+ 
+
+}, { collection: 'MyVisit-data' });
+
 const User = mongoose.model('User', UserSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const labResult = mongoose.model('labResult', LabResultSchema);
 const Surgerydata = mongoose.model('Surgery', SurgerySchema);
+const Medication = mongoose.model('Medication', MedicationSchema);
+const XRay = mongoose.model('XRay', XRaySchema);
+const MyVisit = mongoose.model('MyVisit', MyVisitSchema);
+
 
 module.exports = { User,Patient , labResult,Surgerydata,Admin};

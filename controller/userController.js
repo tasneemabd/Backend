@@ -1,4 +1,4 @@
-const  {User,Patient,Surgerydata ,labResult}  = require('../model/Models');
+const  {User,Patient,Surgerydata ,labResult,Medication ,XRay,MyVisit}  = require('../model/Models');
 
 
 const express = require("express");
@@ -266,4 +266,129 @@ const createToken = (id) => {
           res.status(500).json({ message: 'Server Error' });
         }
       }
+      exports.Medication =async (req, res) => {
+        try {
+      
+        const {  MedicationName,
+          StartDate,
+          IDNumber,
+          QuantityPrescribed,
+          Instructions,
+          } = req.body;
+      
+        const newMedication = new Medication({
+        
+          MedicationName,
+          StartDate,
+          IDNumber,
+          QuantityPrescribed,
+          Instructions,
+      
+        });
+        await newMedication.save();
+      
+        res.status(201).json({ message: 'Medication  saved successfully' });
+      } catch (error) {
+        console.error('Error saving Medication data:', error);
+        res.status(500).json({ message: 'An error occurred' });
+      }
+      }
+      exports.getallMedication = async (req, res) => {
+      
+        try {
+          const { IDNumber } = req.params;
+          // Fetch all patients from the database
+          const MedicationData = await Medication.find({ IDNumber });
+      
+          res.status(200).json(MedicationData );
+        } catch (error) {
+          console.error('Error fetching MedicationData:', error);
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      };
+      
+      exports.XRay =async (req, res) => {
+        try {
+      
+        const {  
+          TypeXray,
+          Description,
+          Date,
+          IDNumber,
+      
+          } = req.body;
+      
+        const newXRay = new XRay({
+        
+          TypeXray,
+          Description,
+          Date,
+          IDNumber,
+         
+      
+        });
+        await newXRay.save();
+      
+        res.status(201).json({ message: 'Medication  saved successfully' });
+      } catch (error) {
+        console.error('Error saving Medication data:', error);
+        res.status(500).json({ message: 'An error occurred' });
+      }
+      }
+      exports.getallXRay = async (req, res) => {
+      
+        try {
+          const { IDNumber } = req.params;
+          // Fetch all patients from the database
+          const XRayData = await XRay.find({ IDNumber });
+      
+          res.status(200).json(XRayData );
+        } catch (error) {
+          console.error('Error fetching MedicationData:', error);
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      };
+      exports.MyVisit =async (req, res) => {
+        try {
+      
+        const {  
+          Clinics,
+            Description,
+            Date,
+            Status,
+          IDNumber,
+      
+          } = req.body;
+      
+        const newMyVisit = new MyVisit({
+        
+          Clinics,
+          Description,
+          Date,
+          Status,
+          IDNumber,
+         
+      
+        });
+        await newMyVisit.save();
+      
+        res.status(201).json({ message: 'MyVisit  saved successfully' });
+      } catch (error) {
+        console.error('Error saving MyVisit data:', error);
+        res.status(500).json({ message: 'An error occurred' });
+      }
+      }
+      exports.getallMyVisit = async (req, res) => {
+      
+        try {
+          const { IDNumber } = req.params;
+          // Fetch all patients from the database
+          const MyVisitData = await MyVisit.find({ IDNumber });
+      
+          res.status(200).json(MyVisitData );
+        } catch (error) {
+          console.error('Error fetching MedicationData:', error);
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      };
       

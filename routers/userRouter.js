@@ -31,6 +31,14 @@ router.route('/getpatientprofile').get (userController.patientProfileinfo);
 
 
 
+router.route("/Medication/:IDNumber").post(userController.Medication);
+router.route('/getallMedication/:IDNumber').get (userController.getallMedication);
+router.route("/XRay/:IDNumber").post(userController.XRay);
+router.route('/getallXRay/:IDNumber').get (userController.getallXRay);
+
+
+router.route("/MyVisit/:IDNumber").post(userController.MyVisit);
+router.route('/allMyVisit/:IDNumber').get (userController.getallMyVisit);
 
 
 
