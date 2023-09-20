@@ -23,7 +23,7 @@ router.route('/patientProfile/:IDNumber').get(userController.getPatientProfileBy
 router.route('/allPatients').get (userController.getallPatients);
 // router.route('/getpatientprofile').get( userController.getpatientprofile);
 router.route("/labresult/:IDNumber").post(userController.labResult);
-router.route('/getalllabresult/:IDNumber').get (userController.getalllabresult);
+router.route('/alllabresult/:IDNumber').get (userController.getalllabresult);
 router.route("/Surgery/:IDNumber").post(userController.SurgeryPost);
 router.route('/getallSurgery/:IDNumber').get(userController.getallSurgery);
 router.route('/getallSurgery').get(userController.getallSurgery);
