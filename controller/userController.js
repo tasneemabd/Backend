@@ -150,7 +150,7 @@ const createToken = (id) => {
       exports.labResult =async (req, res) => {
         try {
       
-        const { TestType,TestName, about, NumericValues,QualitativeResults,Date,Laboratory } = req.body;
+        const { TestType,TestName, about, NumericValues,QualitativeResults,Date,Laboratory,IDNumber, } = req.body;
       
         const newlabResult = new labResult({
           TestType, 
@@ -160,6 +160,8 @@ const createToken = (id) => {
           QualitativeResults,
           Date,
           Laboratory,
+          IDNumber
+      
         });
         await newlabResult.save();
       
