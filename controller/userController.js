@@ -172,8 +172,9 @@ const createToken = (id) => {
       exports.getalllabresult = async (req, res) => {
       
         try {
+          const { IDNumber } = req.params;
           // Fetch all patients from the database
-          const labResults = await labResult.find();
+          const labResults = await labResult.find({ IDNumber });
       
           res.status(200).json(labResults );
         } catch (error) {
