@@ -357,6 +357,9 @@ const createToken = (id) => {
             Date,
             Status,
           IDNumber,
+          HeartRate,
+          BloodGroup,
+          Weight,
       
           } = req.body;
       
@@ -367,6 +370,10 @@ const createToken = (id) => {
           Date,
           Status,
           IDNumber,
+          HeartRate,
+          BloodGroup,
+          Weight,
+
          
       
         });

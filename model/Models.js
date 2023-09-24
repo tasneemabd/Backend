@@ -123,6 +123,13 @@ const MyVisitSchema = new mongoose.Schema({
   IDNumber: { type: Number   },
   Description: { type: String },
   Status: { type: String },
+  HeartRate: { type: Number },
+  Weight: { type: Number },
+  BloodGroup: {
+    type: String,
+    enum: ['A+', 'B+', 'AB+', 'O-', 'A-', 'B-'],
+    default: 'A+',
+  },
  
 
 }, { collection: 'MyVisit-data' });
