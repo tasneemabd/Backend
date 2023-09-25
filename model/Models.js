@@ -157,4 +157,4 @@ const MyVisit = mongoose.model('MyVisit', MyVisitSchema);
 const Allergic = mongoose.model('Allergic', MyAllergicSchema);
 
 
-module.exports = { User,Patient , labResult,Surgerydata,Admin,Medication,XRay,MyVisit};
+module.exports = { User,Patient , labResult,Surgerydata,Admin,Medication,XRay,MyVisit,Allergic};
