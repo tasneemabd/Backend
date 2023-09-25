@@ -41,7 +41,8 @@ router.route("/MyVisit/:IDNumber").post(userController.MyVisit);
 router.route('/allMyVisit/:IDNumber').get (userController.getallMyVisit);
 
 
-
+router.route("/Allergic/:IDNumber").post(userController.Allergic);
+router.route('/getAllergic/:IDNumber').get (userController.getAllergic);
 
 
 

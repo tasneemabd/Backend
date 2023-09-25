@@ -123,6 +123,7 @@ const MyVisitSchema = new mongoose.Schema({
   IDNumber: { type: Number   },
   Description: { type: String },
   Status: { type: String },
+  Drname: { type: String },
   HeartRate: { type: Number },
   Weight: { type: Number },
   BloodGroup: {
@@ -134,6 +135,18 @@ const MyVisitSchema = new mongoose.Schema({
 
 }, { collection: 'MyVisit-data' });
 
+const MyAllergicSchema = new mongoose.Schema({
+  AllergicS : { type: String },
+  IDNumber: { type: Number   },
+  Description: { type: String },
+  Prevalence: { type: Number },
+  AgeDistribution: { type: Number },
+  Reviews: { type: Number },
+  
+ 
+
+}, { collection: 'Allergic' });
+
 const User = mongoose.model('User', UserSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const labResult = mongoose.model('labResult', LabResultSchema);
@@ -141,6 +154,7 @@ const Surgerydata = mongoose.model('Surgery', SurgerySchema);
 const Medication = mongoose.model('Medication', MedicationSchema);
 const XRay = mongoose.model('XRay', XRaySchema);
 const MyVisit = mongoose.model('MyVisit', MyVisitSchema);
+const Allergic = mongoose.model('Allergic', MyAllergicSchema);
 
 
 module.exports = { User,Patient , labResult,Surgerydata,Admin,Medication,XRay,MyVisit};

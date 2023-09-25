@@ -1,4 +1,4 @@
-const  {User,Patient,Surgerydata ,labResult,Medication ,XRay,MyVisit}  = require('../model/Models');
+const  {User,Patient,Surgerydata ,labResult,Medication ,XRay,MyVisit,Allergic}  = require('../model/Models');
 
 
 const express = require("express");
@@ -360,6 +360,7 @@ const createToken = (id) => {
           HeartRate,
           BloodGroup,
           Weight,
+          Drname,
       
           } = req.body;
       
@@ -373,6 +374,7 @@ const createToken = (id) => {
           HeartRate,
           BloodGroup,
           Weight,
+          Drname,
 
          
       
@@ -398,4 +400,51 @@ const createToken = (id) => {
           res.status(500).json({ message: 'Internal server error' });
         }
       };
+  
       
+exports.Allergic =async (req, res) => {
+  try {
+
+  const {  
+    AllergicS,
+    IDNumber,
+    Description,
+    Prevalence,
+    AgeDistribution,
+    Reviews,
+
+
+    } = req.body;
+
+  const newAllergic = new Allergic({
+
+    AllergicS,
+    IDNumber,
+    Description,
+    Prevalence,
+    AgeDistribution,
+    Reviews,
+   
+
+  });
+  await newAllergic.save();
+
+  res.status(201).json({ message: 'MyVisit  saved successfully' });
+} catch (error) {
+  console.error('Error saving MyVisit data:', error);
+  res.status(500).json({ message: 'An error occurred' });
+}
+}
+exports.getAllergic = async (req, res) => {
+
+  try {
+    const { IDNumber } = req.params;
+    // Fetch all patients from the database
+    const MyAllergic = await Allergic.find({ IDNumber });
+
+    res.status(200).json(MyAllergic );
+  } catch (error) {
+    console.error('Error fetching MedicationData:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
