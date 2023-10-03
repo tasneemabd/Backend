@@ -21,6 +21,7 @@ router.route("/addpatients").post(userController.AddPatient);
 // router.route('/patientProfile').get(authMiddleware, userController.getPatientProfile);
 router.route('/patientProfile/:IDNumber').get(userController.getPatientProfileById);
 router.route('/allPatients').get (userController.getallPatients);
+router.route('/patients/:id').delete (userController.deletePatients);
 // router.route('/getpatientprofile').get( userController.getpatientprofile);
 router.route("/labresult/:IDNumber").post(userController.labResult);
 router.route('/alllabresult/:IDNumber').get (userController.getalllabresult);
@@ -28,6 +29,7 @@ router.route("/Surgery/:IDNumber").post(userController.SurgeryPost);
 router.route('/getallSurgery/:IDNumber').get(userController.getallSurgery);
 router.route('/getallSurgery').get(userController.getallSurgery);
 router.route('/getpatientprofile').get (userController.patientProfileinfo);
+router.route('/appointments').get (userController.book);
 
 
 

@@ -147,6 +147,22 @@ const createToken = (id) => {
       };
       
       
+        exports.deletePatients = async (req, res) => {
+      
+          const patientId = req.params.IDNumber;
+
+          try {
+            // Delete the patient from the database by ID
+            await Patient.findByIdAndRemove(patientId);
+        
+            res.status(204).send(); // 204 No Content - indicates success with no response body
+          } catch (error) {
+            console.error('Error deleting patient:', error);
+            res.status(500).json({ message: 'Internal server error' });
+          }
+        }
+      
+      
       exports.labResult =async (req, res) => {
         try {
       
@@ -233,6 +249,19 @@ const createToken = (id) => {
       //     res.status(500).json({ message: 'Internal server error' });
       //   }
       // };
+      exports.book = async (req, res) => {
+        try {
+          const IDNumber = req.params.IDNumber;
+          const surgeries = await Surgerydata.find({ IDNumber });
+          const newAppointment = new Appointment(req.body);
+          await newAppointment.save();
+          res.status(201).json(newAppointment);
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: 'Server error' });
+        }
+      }
+      
       exports.getallSurgery = async (req, res) => {
         try {
           const IDNumber = req.params.IDNumber;

@@ -147,6 +147,13 @@ const MyAllergicSchema = new mongoose.Schema({
 
 }, { collection: 'Allergic' });
 
+
+const appointmentSchema = new mongoose.Schema({
+  name: String,
+  date: Date,
+  // Add more fields as needed
+},{ collection: 'appointmentSchema' });
+
 const User = mongoose.model('User', UserSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const labResult = mongoose.model('labResult', LabResultSchema);
@@ -155,6 +162,7 @@ const Medication = mongoose.model('Medication', MedicationSchema);
 const XRay = mongoose.model('XRay', XRaySchema);
 const MyVisit = mongoose.model('MyVisit', MyVisitSchema);
 const Allergic = mongoose.model('Allergic', MyAllergicSchema);
+const Appointment = mongoose.model('appointment', MyAllergicSchema);
 
 
 module.exports = { User,Patient , labResult,Surgerydata,Admin,Medication,XRay,MyVisit,Allergic};
