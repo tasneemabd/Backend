@@ -276,8 +276,24 @@ const createToken = (id) => {
         }
       };
     
+      exports.deletallSurgery = async (req, res) => {
 
-      
+        try {
+    const IDNumber = req.params.IDNumber;
+    const result = await Surgerydata.findOneAndDelete({ IDNumber });
+
+    if (result) {
+      // The document was found and deleted successfully
+      res.json({ message: 'Document deleted' });
+    } else {
+      // Document with the specified IDNumber not found
+      res.status(404).json({ message: 'Document not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
       
       exports.patientProfileinfo = async (req, res) => {  try {
           const patientId = req.params.IDNumber;
